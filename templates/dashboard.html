@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h2>Dashboard Kesehatan Real-time</h2>
+
+<div class="cards">
+  <div class="card">
+    <h3>Suhu (°C)</h3>
+    <p id="temp">-</p>
+  </div>
+  <div class="card">
+    <h3>Detak Jantung</h3>
+    <p id="hr">-</p>
+  </div>
+  <div class="card">
+    <h3>SpO₂ (%)</h3>
+    <p id="spo2">-</p>
+  </div>
+</div>
+
+<div class="chart-box">
+  <canvas id="healthChart"></canvas>
+</div>
+
+<p class="timestamp">Update terakhir: <span id="ts">-</span></p>
+
+<!-- CDN -->
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

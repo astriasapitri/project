@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="hero-wrapper">
+  <div class="hero">
+    <div class="hero-text">
+      <h1>SmartFit</h1>
+      <p>
+        Sistem monitoring kesehatan berbasis <b>IoT</b><br>
+        memantau <b>suhu</b>, <b>detak jantung</b>,
+        dan <b>SpO₂</b> secara <b>real-time</b>
+      </p>
+
+      <div class="preview">
+        <div><span class="count" data-target="36.8">0</span>°C<small>Suhu</small></div>
+        <div><span class="count" data-target="78">0</span>bpm<small>Detak</small></div>
+        <div><span class="count" data-target="98">0</span>%<small>SpO₂</small></div>
+      </div>
+
+      <a href="/dashboard" class="btn-primary">🚀 Lihat Dashboard</a>
+    </div>
+
+    <div class="hero-icon">❤️</div>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('.count').forEach(counter => {
+  const target = +counter.dataset.target;
+  let current = 0;
+  const update = () => {
+    current += target / 50;
+    if (current < target) {
+      counter.textContent = current.toFixed(1);
+      requestAnimationFrame(update);
+    } else {
+      counter.textContent = target;
+    }
+  };
+  update();
+});
+</script>
+{% endblock %}
