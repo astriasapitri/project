@@ -40,11 +40,16 @@ const chart = new Chart(ctx, {
 socket.on('sensor_update', data => {
   if (!data || !data.timestamp) return;
 
-  // Update kartu
-  document.getElementById('temp').textContent = data.temperature;
-  document.getElementById('hr').textContent   = data.heart_rate;
-  document.getElementById('spo2').textContent = data.spo2;
-  document.getElementById('ts').textContent   = data.timestamp;
+  // Update status
+  document.getElementById('statusText').textContent = data.status_text ?? "-";
+
+  // Update kartu (biar gak tampil "null")
+  document.getElementById('temp').textContent = (data.temperature ?? "-");
+  document.getElementById('hr').textContent   = (data.heart_rate ?? "-");
+  document.getElementById('spo2').textContent = (data.spo2 ?? "-");
+  document.getElementById('ts').textContent   = (data.timestamp ?? "-");
+
+
 
   // Update grafik (max 10 data)
   labels.push(data.timestamp);
